@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIB Backgrounders</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .ministry-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .ministry-title {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .backgrounder-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .backgrounder-list li {
+            margin-bottom: 10px;
+        }
+        .backgrounder-list a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .backgrounder-list a:hover {
+            text-decoration: underline;
+        }
+        .date {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">PIB Backgrounders</h1>
+
+        {% if pib_backgrounders %}
+            {% for ministry, backgrounders in pib_backgrounders.items() %}
+            <div class="ministry-section">
+                <h2 class="ministry-title">{{ ministry }}</h2>
+                <ul class="backgrounder-list">
+                    {% for backgrounder in backgrounders %}
+                    <li>
+                        <a href="{{ backgrounder.url }}" target="_blank">{{ backgrounder.title }}</a> 
+                        <span class="date">- {{ backgrounder.date }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted text-center">No recent backgrounders available.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

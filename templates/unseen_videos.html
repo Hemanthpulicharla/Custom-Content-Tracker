@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSC Preparation: Unseen Videos & Quotes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f0f3f6;
+            --text-color: #333;
+            --card-background: #fff;
+            --button-hover: #1abc9c;
+            --dark-mode-bg: #333;
+            --dark-mode-text: #f5f5f5;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .quote-box {
+            background-color: var(--card-background);
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .quote-text {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .quote-author {
+            font-weight: 600;
+            text-align: right;
+        }
+        .video-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .video-item {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .video-item:hover {
+            transform: translateY(-5px);
+        }
+        .video-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        .video-date {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: var(--button-hover);
+        }
+        .watch-btn {
+            background-color: var(--secondary-color);
+        }
+        .watch-btn:hover {
+            background-color: #27ae60;
+        }
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .checkbox-wrapper input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: var(--card-background);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .dark-mode {
+            background-color: var(--dark-mode-bg);
+            color: var(--dark-mode-text);
+        }
+        .dark-mode .btn {
+            background-color: #555;
+        }
+        @media (max-width: 768px) {
+            .video-item {
+                padding: 15px;
+            }
+            .video-title {
+                font-size: 16px;
+            }
+            .btn {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UPSC Preparation: Unseen Videos & Quotes</h1>
+
+        <button class="btn" id="toggle-dark-mode">Toggle Dark Mode</button>
+        
+        <div class="quote-section">
+            <h2>Selected Quotes</h2>
+            <div class="quote-box">
+                <p class="quote-text" id="quote-text"></p>
+                <p class="quote-author" id="quote-author"></p>
+            </div>
+        </div>
+
+        <h2>Videos</h2>
+        {% if videos %}
+        <form action="{{ url_for('mark_watched') }}" method="POST">
+            <ul class="video-list">
+                {% for video in videos %}
+                <li class="video-item">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" name="video_ids" value="{{ video.videoId }}" id="video-{{ video.videoId }}">
+                        <label for="video-{{ video.videoId }}" class="video-title">{{ video.title }}</label>
+                    </div>
+                    <p class="video-date"><i class="far fa-calendar-alt"></i> Published on: {{ video.publishedAt.strftime('%Y-%m-%d') }}</p>
+                    <button type="button" class="btn watch-btn" data-video-id="{{ video.videoId }}"><i class="fas fa-play"></i> Watch Video</button>
+                </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="submit-btn">Mark Selected as Watched</button>
+        </form>
+        {% else %}
+        <p>No unseen videos found. Great job staying up to date!</p>
+        {% endif %}
+        <br>
+        <p><a href="https://www.youtube.com/playlist?list={{playlist_id}}" target="_blank" class="btn"><i class="fab fa-youtube"></i> Go to Channel</a></p> 
+        <hr>
+        <a href="{{ url_for('index') }}" class="btn"><i class="fas fa-home"></i> Back to Home</a>
+    </div>
+
+    <!-- The Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="video-container">
+                <iframe id="modalIframe" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quotes relevant for UPSC
+        const quotes = [
+            { text: "Education is the most powerful weapon which you can use to change the world.", author: "Nelson Mandela" },
+            { text: "In matters of style, swim with the current; in matters of principle, stand like a rock.", author: "Thomas Jefferson" },
+            { text: "The weak can never forgive. Forgiveness is the attribute of the strong.", author: "Mahatma Gandhi" },
+            { text: "Education is the most powerful weapon which you can use to change the world.", author: "Nelson Mandela" },
+{ text: "In matters of style, swim with the current; in matters of principle, stand like a rock.", author: "Thomas Jefferson" },
+{ text: "The weak can never forgive. Forgiveness is the attribute of the strong.", author: "Mahatma Gandhi" },
+{ text: "Democracy is the government of the people, by the people, for the people.", author: "Abraham Lincoln" },
+{ text: "The best way to find yourself is to lose yourself in the service of others.", author: "Mahatma Gandhi" },
+{ text: "An ounce of practice is worth more than tons of preaching.", author: "Mahatma Gandhi" },
+{ text: "Power tends to corrupt, and absolute power corrupts absolutely.", author: "Lord Acton" },
+{ text: "Be the change that you wish to see in the world.", author: "Mahatma Gandhi" },
+{ text: "Injustice anywhere is a threat to justice everywhere.", author: "Martin Luther King Jr." },
+{ text: "A nation's culture resides in the hearts and in the soul of its people.", author: "Mahatma Gandhi" },
+{ text: "The true test of a civilization is not the census, nor the size of the cities, nor the crops—but the kind of man that the country turns out.", author: "Ralph Waldo Emerson" },
+{ text: "Good governance is less about structure and rules than being focused on the right values.", author: "Ratan Tata" },
+{ text: "The measure of a man is what he does with power.", author: "Plato" },
+{ text: "Justice delayed is justice denied.", author: "William E. Gladstone" },
+{ text: "Ethics is knowing the difference between what you have a right to do and what is right to do.", author: "Potter Stewart" },
+{ text: "You must be the guardian of your own democracy.", author: "Kofi Annan" },
+{ text: "It is not the strongest of the species that survive, nor the most intelligent, but the one most responsive to change.", author: "Charles Darwin" },
+{ text: "True public welfare lies in the happiness of the masses, not in a handful of millionaires.", author: "Jawaharlal Nehru" },
+{ text: "The roots of education are bitter, but the fruit is sweet.", author: "Aristotle" },
+{ text: "Freedom is never voluntarily given by the oppressor; it must be demanded by the oppressed.", author: "Martin Luther King Jr." },
+{ text: "Our greatest glory is not in never falling, but in rising every time we fall.", author: "Confucius" },
+{ text: "The future depends on what we do in the present.", author: "Mahatma Gandhi" },
+{ text: "To sin by silence when they should protest makes cowards of men.", author: "Abraham Lincoln" },
+{ text: "Poverty is the worst form of violence.", author: "Mahatma Gandhi" },
+{ text: "Leadership is not about being in charge. It’s about taking care of those in your charge.", author: "Simon Sinek" },
+{ text: "The more corrupt the state, the more numerous the laws.", author: "Tacitus" },
+{ text: "If we want real peace in the world, we should start educating children.", author: "Mahatma Gandhi" },
+{ text: "The price of greatness is responsibility.", author: "Winston Churchill" },
+{ text: "The greatness of a nation can be judged by how it treats its weakest members.", author: "Mahatma Gandhi" },
+{ text: "There is no higher religion than human service. To work for the common good is the greatest creed.", author: "Woodrow Wilson" },
+{ text: "A leader is one who knows the way, goes the way, and shows the way.", author: "John C. Maxwell" },
+{ text: "A society grows great when old men plant trees whose shade they know they shall never sit in.", author: "Greek Proverb" },
+{ text: "True democracy is not the rule of the majority but the protection of the minority.", author: "Albert Camus" },
+{ text: "A country’s greatness lies in its undying ideals of love and sacrifice that inspire the mothers of the race.", author: "Sarojini Naidu" },
+{ text: "The highest education is that which does not merely give us information but makes our life in harmony with all existence.", author: "Rabindranath Tagore" },
+{ text: "Liberty cannot be preserved without general knowledge among the people.", author: "John Adams" },
+{ text: "There is no limit to what a man can do or where he can go if he does not mind who gets the credit.", author: "Ronald Reagan" },
+{ text: "Integrity is the ability to stand by an idea.", author: "Ayn Rand" },
+{ text: "We do not inherit the earth from our ancestors; we borrow it from our children.", author: "Native American Proverb" },
+{ text: "Development is about transforming the lives of people, not just transforming economies.", author: "Joseph E. Stiglitz" }
+
+            // Add more quotes here
+        ];
+
+        function showRandomQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quote-text').innerText = randomQuote.text;
+            document.getElementById('quote-author').innerText = randomQuote.author;
+        }
+
+        showRandomQuote();
+
+        // Dark Mode Toggle
+        document.getElementById('toggle-dark-mode').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Modal for Video Play
+        const modal = document.getElementById("videoModal");
+        const closeModal = document.getElementsByClassName("close")[0];
+
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+            document.getElementById("modalIframe").src = "";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.getElementById("modalIframe").src = "";
+            }
+        }
+
+        document.querySelectorAll('.watch-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video-id');
+                const iframeSrc = `https://www.youtube.com/embed/${videoId}`;
+                document.getElementById('modalIframe').src = iframeSrc;
+                modal.style.display = "block";
+            });
+        });
+    </script>
+</body>
+</html>

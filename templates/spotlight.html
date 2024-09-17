@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIR Spotlight - Recent Episodes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AIR Spotlight - Recent Episodes</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+        
+        {% if episodes %}
+        <form action="{{ url_for('mark_listened') }}" method="POST">
+            <ul>
+                {% for episode in episodes %}
+                <li>
+                    <input type="checkbox" name="episode_links" value="{{ episode.audio_link }}">
+                    <strong>{{ episode.title }}</strong> ({{ episode.date.strftime("%B %d, %Y at %I:%M %p")}})
+                    <br>
+                    <audio controls>
+                        <source src="{{ episode.audio_link }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </li>
+                {% endfor %}
+            </ul>
+            <button type="submit">Mark Selected as Listened</button>
+        </form>
+        {% else %}
+        <p>No new episodes found.</p>
+        {% endif %}
+        
+        <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+    </div>
+</body>
+</html>

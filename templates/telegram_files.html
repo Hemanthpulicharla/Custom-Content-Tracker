@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Channel File Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+        .message {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .message-time {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Telegram Channel File Tracker</h1>
+
+        <!-- Form to input Telegram Channel usernames -->
+        <form method="POST" class="mb-4">
+            <div class="mb-3">
+                <label for="channels" class="form-label">Enter Telegram Channel Usernames (comma separated):</label>
+                <input type="text" name="channels" class="form-control" id="channels" placeholder="e.g., channel1, channel2, channel3" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Track Files</button>
+        </form>
+
+        <!-- Display fetched file messages -->
+        {% if file_messages %}
+            <h2>Recent File Uploads</h2>
+            {% for channel, messages in file_messages %}
+            <div class="channel-section mb-5">
+                <h3>Channel: {{ channel }}</h3>
+                <div class="message-list">
+                    {% for message in messages %}
+                    <div class="message">
+                        <p class="message-time">{{ message.time }}</p>
+                        <p><strong>File Name:</strong> {{ message.file_name }}</p>
+                        <p><strong>File Size:</strong> {{ message.file_size }} bytes</p>
+                        <p><strong>Media Type:</strong> {{ message.media_type }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted text-center">No recent file uploads available.</p>
+        {% endif %}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
