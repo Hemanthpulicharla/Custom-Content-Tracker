@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% block content %}
+{% include "navbar.html" %}
+
+<header class="masthead" style="background-image: url({{url_for('static',filename='assets/img/home-bg.jpg')}})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Retrospect✍🏻<br>(❁´◡`❁)</h1>
+                    <span class="subheading">Just a step towards understanding and conveying things lucidly..</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% for link in links %}
+            <div class="post-preview">
+                <p>
+                <a href="{{ link.url }}" target="_blank">
+                    <h4 class="post-title">{{ link.title }}</h4>
+                </a>
+                {% if link.description %}
+                <h5 class="post-subtitle" style="font-style: bold">{{ link.description }}</h5>
+                {% endif %}<h6 style="font-style: italic; color: orange">{{link.timestamp.strftime("%d %B, %A %Y") }}</h6>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
